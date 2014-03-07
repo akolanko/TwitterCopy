@@ -1,0 +1,61 @@
+<div id="setcolone">
+
+	<h2>
+		Edit Profile
+	</h2>
+
+	<form METHOD="POST" action="/edit/profile">
+	<label for="fname">First Name</label>
+	<br>
+	<input type="text" name="fname" value="<%= @user.fname if @user%>" size="34">
+	<br>
+	<label for="lname">Last Name</label>
+	<br>
+	<input type="text" name="lname" value="<%= @user.lname if @user %>" size="34">
+	<br>
+	<label for="location">Location</label>
+	<br>
+	<input type="text" name="location" value="<%= @user.profile.location if @user.profile %>" size="34">
+	<br>
+	<label for="website">Website</label>
+	<br>
+	<input type="text" name="website" value="<%= @user.profile.website if @user.profile %>" size="34">
+	<br>
+	<input class="submit" type="submit" value="Save">
+	</form>
+
+</div>
+
+<div id="setcoltwo">
+
+	<h2>
+		Change Password
+	</h2>
+
+	<form method="POST" action="/settings/new">
+		<label for="password">Current Password</label>
+		<br>
+		<input type="password" name="password" size="34">
+		<br>
+		<label for="new_password">New Password</label>
+		<br>
+		<input type="password" name="new_password" size="34">
+		<br>
+		<label for="confirm_password">Confirm Password</label>
+		<br>
+		<input type="password" name="confirm_password" size="34">
+		<br>
+		<input class="submit" type="submit">
+	</form>
+
+	<hr>
+
+	<h2>
+		Delete Account
+	</h2>
+
+	<a href="/delete">
+		<button class="delete">Delete Account</button>
+	</a>
+
+</div>

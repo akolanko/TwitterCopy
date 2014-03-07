@@ -1,0 +1,69 @@
+<div id="colone">
+
+	<div id="currentuser">
+		<img id="main" src="/Image.jpg"/>
+		<p id="name">
+			<%= @user.fname %> <%= @user.lname %>
+		</p>
+		<p id="hash">
+			@<%= @user.username %>
+		</p>
+
+		<div id="count">
+			<div class="stats">
+				<a class="head" href="/profile">POSTS</a>
+				<br>
+				<span class="amount"><%= @user.posts.count %></span>
+			</div>
+			<div class="statsprofile">
+				<a class="head" href="/following/<%= @user.id %>">FOLLOWING</a>
+				<br>
+				<span class="amount"><%= @user.followed_users.count %></span>
+			</div>
+			<div class="statsprofile">
+				<a class="head" href="/followers/<%= @user.id %>">FOLLOWERS</a>
+				<br>
+				<span class="amount"><%= @user.followers.count %></span>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div id="coltwo">
+
+	<div id="userlist">
+
+		<h1>
+			<%= @person.fname %>'s Following
+		</h1>
+
+		<hr>
+
+		<% @person.followed_users.all.each do |user| %>
+			<div id="userdiv">
+				<a class="usernamelink" href="/users/<%= user.id %>">
+					<img src="/Thumbnail.jpg" width="50px"/>
+					@<%= user.username %>
+				</a>
+			</div>
+			<div id="followcheck">
+				<% if current_user.following?(user) %>
+					<a href="/unfollow/<%= user.id %>">
+						<button id="unfollowclick">UNFOLLOW</button>
+					</a>		
+				<% else %>
+					<a href="/follow/<%= user.id %>">
+						<button id="followclick">FOLLOW</button>
+					</a>
+				<% end %>
+			</div>
+			<div class="clear">
+			</div>
+			<hr>
+		<% end %>
+
+	</div>
+
+</div>

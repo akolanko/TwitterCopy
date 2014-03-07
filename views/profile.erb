@@ -1,0 +1,92 @@
+<div id="colone">
+
+	<div id="postform">
+
+			<h3>
+				New Post
+			</h3>
+
+			<form method="POST" action="/posts/new">
+				<br>
+				<input type="text" name="title" value="Post title..." size="36">
+				<br>
+				<textarea name="content" rows="2" cols="38">Compose new post...</textarea>
+				<br>
+				<input class="submit" type="submit" value="Post">
+			</form>
+
+	</div>
+
+	<div id="links">
+		<a class="sidelink" href="/following/<%= @user.id %>">
+			Following
+		</a>
+		<hr>
+		<a class="sidelink" href="/followers/<%= @user.id %>">
+			Followers
+		</a>
+	</div>
+
+</div>
+
+<div id="coltwo">
+
+	<div id="currentinfo">
+
+		<img id="profileimage" src="Image.jpg"/>
+		<p id="currentname">
+			<%= @user.fname %> <%= @user.lname %>
+		</p>
+		<p id="currentusername">
+			@<%= @user.username %>
+		</p>
+		<p id="profileinfo">
+			<span class="location"><%= @user.profile.location if @user.profile %></span><a class="website" href="http://<%= @user.profile.website if @user.profile %>"><%= @user.profile.website if @user.profile %></a>
+		</p>
+
+		<div id="countprofile">
+			<div class="statsprofile">
+				<a class="head" href="/profile">POSTS</a>
+				<br>
+				<span class="amount"><%= @user.posts.count %></span>
+			</div>
+			<div class="statsprofile">
+				<a class="head" href="/following/<%= @user.id %>">FOLLOWING</a>
+				<br>
+				<span class="amount"><%= @user.followed_users.count %></span>
+			</div>
+			<div class="statsprofile">
+				<a class="head" href="/followers/<%= @user.id %>">FOLLOWERS</a>
+				<br>
+				<span class="amount"><%= @user.followers.count %></span>
+			</div>
+			<a href="/settings">
+				<button id="editprofile">EDIT PROFILE</button>
+			</a>
+		</div>
+
+	</div>
+
+	<div id="profileposts">
+
+		<h1>Posts</h1>
+
+		<hr>
+
+		<% @user.posts.reverse.each do |post| %>
+		<br>
+		<a class="usernamelink" href="/profile">
+			@<%= @user.username %>
+		</a>
+		<br>
+		<span class="posttitle"><%= post.title %></span>
+		<br>
+		<span class="postcontent"><%= post.content %></span>
+		<br>
+		<br>
+		<hr>
+		<% end %>
+
+	</div>
+
+</div>

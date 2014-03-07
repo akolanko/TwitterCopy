@@ -1,0 +1,58 @@
+<div id="colone">
+
+	<div id="currentuser">
+		<img id="main" src="Image.jpg"/>
+		<p id="name">
+			<%= @user.fname %> <%= @user.lname %>
+		</p>
+		<p id="hash">
+			@<%= @user.username %>
+		</p>
+
+		<div id="count">
+			<div class="stats">
+				<a class="head" href="/profile">POSTS</a>
+				<br>
+				<span class="amount"><%= @user.posts.count %></span>
+			</div>
+			<div class="statsprofile">
+				<a class="head" href="/following">FOLLOWING</a>
+				<br>
+				<span class="amount"><%= @user.followed_users.count %></span>
+			</div>
+			<div class="statsprofile">
+				<a class="head" href="/followers">FOLLOWERS</a>
+				<br>
+				<span class="amount"><%= @user.followers.count %></span>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<div id="coltwo">
+
+	<div id="userposts">
+		<h1>
+			Posts
+		</h1>
+
+		<hr>
+
+		<% Post.all.reverse.each do |post| %>
+			<br>
+			<a class="usernamelink" href="/users/<%= post.user_id %>">
+				@<%= post.user.username%>
+			</a>
+			<br>
+			<span class="posttitle"><%= post.title %></span>
+			<br>
+			<span class="postcontent"><%= post.content %></span>
+			<br>
+			<br>
+			<hr>
+		<% end %>
+	</div>
+
+</div>

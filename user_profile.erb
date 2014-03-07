@@ -1,0 +1,46 @@
+<img id="main" src="Image.jpg" width="280px"/>
+<br>
+
+@ <%= @user.username %>
+
+<ul id="count">
+	<li>
+		<div class="stats">
+			Posts
+			<%= @user.posts.count %>
+		</div>
+	</li>
+	<li>
+		<div class="stats">
+			Following
+			<%= @user.followed_users.count %>
+		</div>
+	</li>
+	<li>
+		<div class="stats">
+			Followers
+			<%= @user.followers.count %>
+		</div>
+	</li>
+</ul>
+
+<div id="follow_form">
+	<% if current_user.following?(@user) %>
+		Unfollow
+	<% else %>
+		Follow
+	<% end %>
+</div>
+
+<h1>Posts</h1>
+
+<% @user.posts.reverse.each do |post| %>
+@
+<%= @user.username %>
+<br>
+<%= post.title %>
+<br>
+<%= post.content %>
+<br>
+<br>
+<% end %>

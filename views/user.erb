@@ -1,0 +1,85 @@
+<div id="colone">
+
+	<div id="links">
+		<a class="sidelink" href="/following/<%= @profile.id %>">
+			Following
+		</a>
+		<hr>
+		<a class="sidelink" href="/followers/<%= @profile.id %>">
+			Followers
+		</a>
+	</div>
+
+</div>
+
+<div id="coltwo">
+
+	<div id="currentinfo">
+
+		<img id="profileimage" src="/Image.jpg"/>
+		<p id="currentname">
+			<%= @profile.fname %> <%= @profile.lname %>
+		</p>
+		<p id="currentusername">
+			@<%= @profile.username %>
+		</p>
+		<p id="profileinfo">
+			<span class="location"><%= @profile.profile.location if @profile.profile %></span><a class="website" href="http://<%= @profile.profile.website if @profile.profile %>"><%= @profile.profile.website if @profile.profile %></a>
+		</p>
+
+		<div id="countprofile">
+			<div class="statsprofile">
+				<a class="head" href="/users/<%= @profile.id %>">POSTS</a>
+				<br>
+				<span class="amount"><%= @profile.posts.count %></span>
+			</div>
+			<div class="statsprofile">
+				<a class="head" href="/following/<%= @profile.id %>">FOLLOWING</a>
+				<br>
+				<span class="amount"><%= @profile.followed_users.count %></span>
+			</div>
+			<div class="statsprofile">
+				<a class="head" href="/followers/<%= @profile.id %>">FOLLOWERS</a>
+				<br>
+				<span class="amount"><%= @profile.followers.count %></span>
+			</div>
+			
+			<div id="follow_form">
+				<% if current_user.following?(@profile) %>
+					<a href="/unfollow/<%= @profile.id %>">
+						<button id="follow">UNFOLLOW</button>
+					</a>		
+				<% else %>
+					<a href="/follow/<%= @profile.id %>">
+						<button id="follow">FOLLOW</button>
+					</a>
+				<% end %>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div id="profileposts">
+
+		<h1>Posts</h1>
+
+		<hr>
+
+		<% @profile.posts.reverse.each do |post| %>
+		<br>
+		<a class="usernamelink" href="/users/<%= @profile.id %>">
+			@<%= @profile.username %>
+		</a>
+		<br>
+		<span class="posttitle"><%= post.title %></span>
+		<br>
+		<span class="postcontent"><%= post.content %></span>
+		<br>
+		<br>
+		<hr>
+		<% end %>
+
+	</div>
+
+</div>

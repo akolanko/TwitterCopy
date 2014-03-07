@@ -1,7 +1,7 @@
 require "sinatra"
 require "sinatra/activerecord"
 
-set :database, "sqlite3:///blogtest.sqlite3"
+configure (:development){set :database, "sqlite3:///blog.sqlite3"}
 set :sessions, true
 
 require 'bundler/setup'

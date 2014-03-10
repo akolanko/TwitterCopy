@@ -75,14 +75,21 @@
 
 		<% @user.posts.reverse.each do |post| %>
 		<br>
-		<a class="usernamelink" href="/profile">
-			@<%= @user.username %>
-		</a>
-		<br>
-		<span class="posttitle"><%= post.title %></span>
-		<br>
-		<span class="postcontent"><%= post.content %></span>
-		<br>
+		<div class="profileposts">
+			<a class="usernamelink" href="/profile">
+				@<%= @user.username %></a>
+			<br>
+			<span class="posttitle"><%= post.title %></span>
+			<br>
+			<span class="postcontent"><%= post.content %></span>
+			<br>
+			<br>
+		</div>
+		<div class="postdel">
+			<a class="deletepost" href="/deletepost/<%= post.id %>">DELETE POST</a>
+		</div>
+		<div class="clear">
+		</div>
 		<br>
 		<hr>
 		<% end %>

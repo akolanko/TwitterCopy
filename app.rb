@@ -1,7 +1,7 @@
 require "sinatra"
 require "sinatra/activerecord"
 
-configure (:development){set :database, "sqlite3:///blog.sqlite3"}
+configure (:development){set :database, "sqlite3:///blogtest.sqlite3"}
 set :sessions, true
 
 require 'bundler/setup'
@@ -153,4 +153,10 @@ end
 get "/followingposts" do
 	current_user
 	erb :followingposts
+end
+
+get "/deletepost/:id" do
+	current_user
+	Post.find(params[:id]).destroy
+	redirect "/profile"
 end

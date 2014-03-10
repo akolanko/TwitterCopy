@@ -455,3 +455,33 @@ a.sidelink:visited{
 a.sidelink:hover{
 	color: #a9a9a9;
 }
+
+.profileposts{
+	width: 380px;
+	height: 60px;
+	margin: 0;
+	padding: 0 20px 0 0;
+	float: left;
+}
+
+.postdel{
+	width: 100px;
+	height: 20px;
+	float: left;
+	margin: 20px 0;
+	padding: 0;
+}
+
+a.deletepost:link{
+	color: #a9a9a9;
+	text-decoration: none;
+	font-size: .9em
+}
+
+a.deletepost:visited{
+	color: #a9a9a9;
+}
+
+a.deletepost:hover{
+	color: #90bdcf;
+}

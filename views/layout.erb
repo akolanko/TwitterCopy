@@ -18,7 +18,7 @@
 				<div id="nav">
 					<ul id="nav">
 						<li>
-							Hello, <%= @user.fname if @user %>
+							Hello, <%= current_user.fname if current_user %>
 						</li>
 						<li>
 							<a href="/home">

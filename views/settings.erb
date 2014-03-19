@@ -7,19 +7,19 @@
 	<form METHOD="POST" action="/edit/profile">
 	<label for="fname">First Name</label>
 	<br>
-	<input type="text" name="fname" value="<%= @user.fname if @user%>" size="34">
+	<input type="text" name="fname" value="<%= current_user.fname if current_user%>" size="34">
 	<br>
 	<label for="lname">Last Name</label>
 	<br>
-	<input type="text" name="lname" value="<%= @user.lname if @user %>" size="34">
+	<input type="text" name="lname" value="<%= current_user.lname if current_user %>" size="34">
 	<br>
 	<label for="location">Location</label>
 	<br>
-	<input type="text" name="location" value="<%= @user.profile.location if @user.profile %>" size="34">
+	<input type="text" name="location" value="<%= current_user.profile.location if current_user.profile %>" size="34">
 	<br>
 	<label for="website">Website</label>
 	<br>
-	<input type="text" name="website" value="<%= @user.profile.website if @user.profile %>" size="34">
+	<input type="text" name="website" value="<%= current_user.profile.website if current_user.profile %>" size="34">
 	<br>
 	<input class="submit" type="submit" value="Save">
 	</form>

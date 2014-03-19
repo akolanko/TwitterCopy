@@ -3,27 +3,27 @@
 	<div id="currentuser">
 		<img id="main" src="Image.jpg"/>
 		<p id="name">
-			<%= @user.fname %> <%= @user.lname %>
+			<%= current_user.fname %> <%= current_user.lname %>
 		</p>
 		<p id="hash">
-			@<%= @user.username %>
+			@<%= current_user.username %>
 		</p>
 
 		<div id="count">
 			<div class="stats">
 				<a class="head" href="/profile">POSTS</a>
 				<br>
-				<span class="amount"><%= @user.posts.count %></span>
+				<span class="amount"><%= current_user.posts.count %></span>
 			</div>
 			<div class="statsprofile">
-				<a class="head" href="/following/<%= @user.id %>">FOLLOWING</a>
+				<a class="head" href="/following/<%= current_user.id %>">FOLLOWING</a>
 				<br>
-				<span class="amount"><%= @user.followed_users.count %></span>
+				<span class="amount"><%= current_user.followed_users.count %></span>
 			</div>
 			<div class="statsprofile">
-				<a class="head" href="/followers/<%= @user.id %>">FOLLOWERS</a>
+				<a class="head" href="/followers/<%= current_user.id %>">FOLLOWERS</a>
 				<br>
-				<span class="amount"><%= @user.followers.count %></span>
+				<span class="amount"><%= current_user.followers.count %></span>
 			</div>
 		</div>
 

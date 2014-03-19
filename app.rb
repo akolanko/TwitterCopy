@@ -16,7 +16,7 @@ require "./models"
 helpers do
 	def current_user
 		if session[:user_id]
-			@user = User.find(session[:user_id])
+			current_user ||= User.find(session[:user_id])
 		else
 			nil
 		end
@@ -25,7 +25,6 @@ end
 
 get "/" do
 	if session[:user_id]
-		current_user
 		erb :home
 	else
 		erb :signin
@@ -33,14 +32,13 @@ get "/" do
 end
 
 get "/home" do
-	current_user
 	erb :home
 end
 
 post "/sessions/new" do
-	@user = User.where(email: params[:email]).first
-	if @user && @user.password == params[:password]
-		session[:user_id] = @user.id
+	current_user = User.where(email: params[:email]).first
+	if current_user && current_user.password == params[:password]
+		session[:user_id] = current_user.id
 		flash[:notice] = "You have been logged in sucessfully"
 		redirect "/home"
 	else
@@ -51,9 +49,9 @@ end
 
 post "/users/new" do
 	if params[:password] == params[:confirm_password]
-		@user = User.create(fname: params[:fname], lname: params[:lname], email: params[:email], password: params[:password], username: params[:username])
+		current_user = User.create(params[:user])
 		flash[:notice] = "Thanks for signing up!"
-		session[:user_id] = @user.id
+		session[:user_id] = current_user.id
 	else
 		flash[:alert] = "There was a problem signing you up."
 	end
@@ -72,30 +70,25 @@ post "/posts/new" do
 end
 
 get "/profile" do
-	current_user
 	erb :profile
 end
 
 get "/users/:id" do
-	current_user
 	@profile = User.find(params[:id])
 	erb :user
 end
 
 get "/discover" do
-	current_user
 	erb :users
 end
 
 get "/settings" do
-	current_user
 	erb :settings
 end
 
 post "/settings/new" do
-	current_user
-	if @user.password == params[:password] && params[:new_password] == params[:confirm_password]
-		@user.update_attributes(password: params[:new_password])
+	if current_user.password == params[:password] && params[:new_password] == params[:confirm_password]
+		current_user.update_attributes(password: params[:new_password])
 		flash[:notice] = "Your password has been sucessfully changed."
 	else
 		flash[:alert] = "There was a problem changing your password."
@@ -104,59 +97,48 @@ post "/settings/new" do
 end
 
 get "/delete" do
-	if true
-		current_user.destroy
-		session[:user_id] = nil
-		flash[:notice] = "Your account has been successfully deleted."
-		redirect "/"
-	else
-		redirect "/settings"
-	end
+	current_user.destroy
+	session[:user_id] = nil
+	flash[:notice] = "Your account has been successfully deleted."
+	redirect "/"
 end
 
 post "/edit/profile" do
-	current_user
-	@user.update_attributes(fname: params[:fname], lname: params[:lname])
-	if @user.profile
-		@user.profile.update_attributes(location: params[:location], website: params[:website])
+	current_user.update_attributes(fname: params[:fname], lname: params[:lname])
+	if current_user.profile
+		current_user.profile.update_attributes(location: params[:location], website: params[:website])
 	else
-		Profile.create(location: params[:location], website: params[:website], user_id: @user.id)
+		Profile.create(location: params[:location], website: params[:website], user_id: current_user.id)
 	end
 	flash[:notice] = "Your profile has been updated successfully."
 	redirect "/settings"
 end
 
 get "/unfollow/:id" do
-	current_user
-	Relationship.find_by(follower_id: @user.id, followed_id: params[:id]).destroy
+	Relationship.find_by(follower_id: current_user.id, followed_id: params[:id]).destroy
 	redirect "/home"
 end
 
 get "/follow/:id" do
-	current_user
-	Relationship.create(follower_id: @user.id, followed_id: params[:id])
+	Relationship.create(follower_id: current_user.id, followed_id: params[:id])
 	redirect "/profile"
 end
 
 get "/following/:id" do
-	current_user
 	@person = User.find(params[:id])
 	erb :following
 end
 
 get "/followers/:id" do
-	current_user
 	@person = User.find(params[:id])
 	erb :followers
 end
 
 get "/followingposts" do
-	current_user
 	erb :followingposts
 end
 
 get "/deletepost/:id" do
-	current_user
 	Post.find(params[:id]).destroy
 	redirect "/profile"
 end

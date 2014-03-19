@@ -322,6 +322,12 @@ input[type="text"]{
    color: #8e8e8e;
 }
 
+input[type="password"]{
+   font-family: inherit;
+   font-size: inherit;
+   color: #8e8e8e;	
+}
+
 textarea{
    font-family: inherit;
    font-size: inherit;

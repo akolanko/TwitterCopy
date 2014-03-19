@@ -8,9 +8,9 @@
 
 			<form method="POST" action="/posts/new">
 				<br>
-				<input type="text" name="title" value="Post title..." size="36">
+				<input type="text" name="title" placeholder="Post title..." size="36">
 				<br>
-				<textarea name="content" rows="2" cols="38">Compose new post...</textarea>
+				<textarea name="content" rows="2" cols="38" placeholder="Compose new post..."></textarea>
 				<br>
 				<input class="submit" type="submit" value="Post">
 			</form>
@@ -18,11 +18,11 @@
 	</div>
 
 	<div id="links">
-		<a class="sidelink" href="/following/<%= @user.id %>">
+		<a class="sidelink" href="/following/<%= current_user.id %>">
 			Following
 		</a>
 		<hr>
-		<a class="sidelink" href="/followers/<%= @user.id %>">
+		<a class="sidelink" href="/followers/<%= current_user.id %>">
 			Followers
 		</a>
 	</div>
@@ -35,30 +35,30 @@
 
 		<img id="profileimage" src="Image.jpg"/>
 		<p id="currentname">
-			<%= @user.fname %> <%= @user.lname %>
+			<%= current_user.fname %> <%= current_user.lname %>
 		</p>
 		<p id="currentusername">
-			@<%= @user.username %>
+			@<%= current_user.username %>
 		</p>
 		<p id="profileinfo">
-			<span class="location"><%= @user.profile.location if @user.profile %></span><a class="website" href="http://<%= @user.profile.website if @user.profile %>"><%= @user.profile.website if @user.profile %></a>
+			<span class="location"><%= current_user.profile.location if current_user.profile %></span><a class="website" href="http://<%= current_user.profile.website if current_user.profile %>"><%= current_user.profile.website if current_user.profile %></a>
 		</p>
 
 		<div id="countprofile">
 			<div class="statsprofile">
 				<a class="head" href="/profile">POSTS</a>
 				<br>
-				<span class="amount"><%= @user.posts.count %></span>
+				<span class="amount"><%= current_user.posts.count %></span>
 			</div>
 			<div class="statsprofile">
-				<a class="head" href="/following/<%= @user.id %>">FOLLOWING</a>
+				<a class="head" href="/following/<%= current_user.id %>">FOLLOWING</a>
 				<br>
-				<span class="amount"><%= @user.followed_users.count %></span>
+				<span class="amount"><%= current_user.followed_users.count %></span>
 			</div>
 			<div class="statsprofile">
-				<a class="head" href="/followers/<%= @user.id %>">FOLLOWERS</a>
+				<a class="head" href="/followers/<%= current_user.id %>">FOLLOWERS</a>
 				<br>
-				<span class="amount"><%= @user.followers.count %></span>
+				<span class="amount"><%= current_user.followers.count %></span>
 			</div>
 			<a href="/settings">
 				<button id="editprofile">EDIT PROFILE</button>
@@ -73,11 +73,11 @@
 
 		<hr>
 
-		<% @user.posts.reverse.each do |post| %>
+		<% current_user.posts.reverse.each do |post| %>
 		<br>
 		<div class="profileposts">
 			<a class="usernamelink" href="/profile">
-				@<%= @user.username %></a>
+				@<%= current_user.username %></a>
 			<br>
 			<span class="posttitle"><%= post.title %></span>
 			<br>
